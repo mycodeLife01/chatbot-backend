@@ -1,11 +1,10 @@
-from sqlalchemy import CursorResult, Select, Update
-from dependencies.db import get_session
+from sqlalchemy import CursorResult
+from app.dependencies.db import get_session
 from sqlmodel import Session
-from schemas.user import UserCreate, UserUpdate
+from app.schemas.user import UserCreate, UserUpdate
 from fastapi import Depends
-from models.user import User
+from app.models.user import User
 from sqlmodel import update, select
-import uuid
 
 
 def create_user(user_create: UserCreate, session: Session) -> User:

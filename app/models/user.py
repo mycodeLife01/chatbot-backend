@@ -1,10 +1,6 @@
 from sqlmodel import Field, SQLModel, UniqueConstraint
-from datetime import datetime, timezone
+from app.common.time_tools import now_timestamp
 import uuid
-
-
-def now_timestamp():
-    return int(datetime.now(timezone.utc).timestamp())
 
 
 class User(SQLModel, table=True):
@@ -12,9 +8,7 @@ class User(SQLModel, table=True):
         UniqueConstraint("username"),
         UniqueConstraint("email"),
     )
-    user_id: str = Field(
-        primary_key=True, default_factory=lambda: str(uuid.uuid4())
-    )
+    user_id: str = Field(primary_key=True, default_factory=lambda: str(uuid.uuid4()))
     username: str = Field(nullable=False, max_length=32)
     password: str = Field(nullable=False, max_length=255)
     avatar: str = Field(nullable=False, max_length=255)

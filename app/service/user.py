@@ -1,13 +1,13 @@
-from core.exceptions import (
+from app.core.exceptions import (
     UserExistException,
     UserNotExistException,
     UserPasswordInvalidException,
 )
-from core.security import create_access_token, hash_password, verify_password
-from crud.user import create_user, find_user_by_id, find_user_by_username
-from schemas.user import UserCreate, UserLogin, UserResponse
+from app.core.security import create_access_token, hash_password, verify_password
+from app.crud.user import create_user, find_user_by_id, find_user_by_username
+from app.schemas.user import UserCreate, UserLogin, UserResponse
 import logging
-from schemas.user import Token
+from app.schemas.user import Token
 
 
 def user_register(user_create: UserCreate, session) -> Token:

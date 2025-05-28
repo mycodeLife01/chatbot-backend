@@ -18,3 +18,12 @@ class UserNotExistException(BusinessException):
 class UserPasswordInvalidException(BusinessException):
     def __init__(self, code: int = 2003, msg: str = "user password invalid"):
         super().__init__(code, msg)
+
+
+class ChatExistException(BusinessException):
+    def __init__(self, code: int = 3001, msg: str = "chat already exist"):
+        super().__init__(code, msg)
+
+class ChatDeletedException(BusinessException):
+    def __init__(self, code: int = 3002, msg: str = "chat already deleted"):
+        super().__init__(code, msg)

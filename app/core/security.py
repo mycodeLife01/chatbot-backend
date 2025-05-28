@@ -1,5 +1,4 @@
 from time import timezone
-import uuid
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from passlib.context import CryptContext
@@ -7,9 +6,9 @@ from jose import jwt, JWTError
 from datetime import datetime, timedelta, timezone
 from dotenv import load_dotenv
 import os
-from dependencies.db import get_session
-from schemas.user import UserResponse
-from common.user import get_user_by_id
+from app.dependencies.db import get_session
+from app.schemas.user import UserResponse
+from app.common.user import get_user_by_id
 
 load_dotenv()
 # ================= 配置区域 =================
