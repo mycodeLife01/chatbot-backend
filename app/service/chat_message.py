@@ -1,9 +1,14 @@
 import logging
-from app.crud.chat_message import find_messages_by_chat_id, create_message
+from app.crud.chat_message import (
+    find_latest_message_by_chat_id,
+    find_messages_by_chat_id,
+    create_message,
+)
 from app.crud.chat import find_chat_by_chat_id
 from app.schemas.chat_file import ChatFileCreate
 from app.schemas.chat_message import ChatMessageResponse, ChatMessageCreate
 from app.core.exceptions import ChatDeletedException
+from app.service.ai import do_ai_response
 from app.service.chat_file import create_files_for_message, get_files_for_message
 from typing import Optional, List
 
@@ -102,3 +107,19 @@ def add_new_message(
             exc_info=True,
         )
         raise
+
+
+def generate_ai_response(chat_id: str, session) -> str | None:
+    try:
+        latest_message = find_latest_message_by_chat_id(chat_id, session)
+        if latest_message.is_ai == 0:
+            return do_ai_response(latest_message.message_content, chat_id, session)
+        return None
+    except Exception as e:
+        logging.error(
+            f"Error generating AI response because of unexpected server error: {e}",
+            exc_info=True,
+        )
+        raise
+    finally:
+        session.rollback()

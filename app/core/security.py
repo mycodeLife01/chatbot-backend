@@ -14,7 +14,7 @@ load_dotenv()
 # ================= 配置区域 =================
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 60
+ACCESS_TOKEN_EXPIRE_MINUTES = 20160
 
 # =============== 密码哈希区域 ================
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
