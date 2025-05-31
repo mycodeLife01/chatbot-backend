@@ -9,6 +9,8 @@ class ChatBase(BaseModel):
 class ChatResponse(ChatBase):
     chat_id: str
     user_id: str
+    create_time: int
+    update_time: int
 
 
 class ChatCreate(ChatBase):

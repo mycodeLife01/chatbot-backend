@@ -121,5 +121,4 @@ def generate_ai_response(chat_id: str, session) -> str | None:
             exc_info=True,
         )
         raise
-    finally:
-        session.rollback()
+
