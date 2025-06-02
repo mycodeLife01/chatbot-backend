@@ -69,3 +69,4 @@ desktop.ini
 *.svg
 
 # Others (你可以根据实际情况添加)
+*.service
