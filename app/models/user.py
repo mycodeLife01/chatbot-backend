@@ -15,4 +15,4 @@ class User(SQLModel, table=True):
     create_time: int = Field(nullable=False, default_factory=now_timestamp)
     update_time: int = Field(nullable=False, default_factory=now_timestamp)
     is_delete: int = Field(nullable=False, default=0)
-    email: str = Field(max_length=64)
+    email: str = Field(nullable=True ,max_length=64)
