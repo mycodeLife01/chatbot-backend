@@ -1,0 +1,12 @@
+fastapi[all]
+jose
+openai
+passlib
+pydantic[email]
+python-dotenv
+python_jose
+python_jose
+SQLAlchemy
+sqlmodel
+uvicorn
+pymysql
