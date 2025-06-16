@@ -11,3 +11,4 @@ sqlmodel
 uvicorn
 pymysql
 gunicorn
+bcrypt
