@@ -3,7 +3,6 @@ from fastapi.security import OAuth2PasswordRequestForm
 from app.core.security import get_current_user
 from app.service.user import user_login, user_register
 from app.schemas.user import UserCreate, Token, UserLogin, UserResponse
-from app.dependencies.db import get_session
 from app.dependencies.common import session_dep
 
 router = APIRouter(
@@ -22,3 +21,8 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), session=session_dep)
     return user_login(
         UserLogin(username=form_data.username, password=form_data.password), session
     )
+
+
+@router.get("/me", response_model=UserResponse)
+def get_logged_in_user(user: UserResponse = Depends(get_current_user)):
+    return user
