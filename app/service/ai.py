@@ -69,30 +69,32 @@ async def do_ai_response(chat_id: str, session):
             if chunk.choices[0].delta.content is not None:
                 content = chunk.choices[0].delta.content
                 full_response += content
-            # 第一个chunk时创建消息
-            if message_id is None:
-                new_message = create_message(
-                    ChatMessageCreate(
-                        chat_id=chat_id,
-                        message_content=full_response,
-                        is_ai=1,
-                    ),
-                    session,
-                )
-                message_id = new_message.message_id
-            else:
-                # 更新消息内容
-                update_message_content(message_id, full_response, session)
-            # 发送数据块到前端
-            data = {
-                "type": "chunk",
-                "content": content,
-                "message_id": message_id,
-                "full_content": full_response,
-            }
-            yield f"data: {json.dumps(data, ensure_ascii=False)}\n\n"
-            # 模拟实时效果
-            await asyncio.sleep(0.01)
+
+                # 第一个chunk时创建消息
+                if message_id is None:
+                    new_message = create_message(
+                        ChatMessageCreate(
+                            chat_id=chat_id,
+                            message_content=full_response,
+                            is_ai=1,
+                        ),
+                        session,
+                    )
+                    message_id = new_message.message_id
+                else:
+                    # 更新消息内容
+                    update_message_content(message_id, full_response, session)
+
+                # 发送数据块到前端
+                data = {
+                    "type": "chunk",
+                    "content": content,
+                    "message_id": message_id,
+                    "full_content": full_response,
+                }
+                yield f"data: {json.dumps(data, ensure_ascii=False)}\n\n"
+                # 模拟实时效果
+                await asyncio.sleep(0.01)
         # 标记完成
         if message_id:
             update_message_is_complete(message_id, 1, session)
