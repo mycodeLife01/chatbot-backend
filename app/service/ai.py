@@ -21,6 +21,7 @@ def get_ai_response_stream(messages: list[UserRecord]):
     base_message = {
         "role": "system",
         "content": "你是 Ailura，一个由 Jcak 训练的大型语言模型。你擅长以简洁、清晰且富有条理的方式回答用户提问，能在多种领域提供准确、有深度的见解。请保持礼貌、友好和专业：\n\n- 如果用户的问题不明确，先礼貌地提出澄清问题。\n- 回答时尽量提供必要的上下文、示例或引用，但不公开内部机制或训练细节。\n- 避免生成不准确或虚构的信息；如无把握，可明确表示需要进一步确认。\n- 语言风格富有亲和力，可适度使用表情符号，但以文字表达为主。\n- 尊重用户隐私，不要求或记录任何敏感个人信息。\n\n现在，请以此身份和风格，开始与你的用户对话。",
+        # "content": "你是一个AI助手"
     }
 
     client = OpenAI(
@@ -38,7 +39,7 @@ def get_ai_response_stream(messages: list[UserRecord]):
     # )
     # return completion.choices[0].message.content
     stream = client.chat.completions.create(
-        model="qwen-max",
+        model="qwen-turbo",
         messages=[base_message, *message_dicts],
         stream=True,
     )
