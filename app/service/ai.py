@@ -38,7 +38,7 @@ def get_ai_response_stream(messages: list[UserRecord]):
     # )
     # return completion.choices[0].message.content
     stream = client.chat.completions.create(
-        model="qwen-plus",
+        model="qwen-max",
         messages=[base_message, *message_dicts],
         stream=True,
     )
