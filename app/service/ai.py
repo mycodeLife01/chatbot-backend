@@ -39,7 +39,7 @@ def get_ai_response_stream(messages: list[UserRecord]):
     # )
     # return completion.choices[0].message.content
     stream = client.chat.completions.create(
-        model="google/gemini-2.5-flash-preview-05-20",
+        model="google/gemini-2.5-flash",
         messages=[base_message, *message_dicts],
         stream=True,
     )
